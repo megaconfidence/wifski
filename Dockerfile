@@ -9,7 +9,7 @@ WORKDIR /usr/src/wifski-container
 RUN apt-get update && apt-get install -y libssl-dev pkg-config build-essential ca-certificates
 
 # Copy the application source code
-COPY . .
+COPY ./wifski-container/ .
 
 # Build the application in release mode
 RUN cargo build --release

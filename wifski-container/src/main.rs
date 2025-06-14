@@ -1,8 +1,9 @@
 use actix_multipart::Multipart;
-use actix_web::{error, web, App, Error, HttpResponse, HttpServer};
+use actix_web::{error, web, App, Error, HttpResponse, HttpServer, Responder};
 use futures_util::stream::StreamExt;
 use sanitize_filename::sanitize;
 use serde::Deserialize;
+use serde_json::json;
 use std::io::Write;
 use std::process::Command;
 use tempfile::NamedTempFile;
@@ -79,6 +80,10 @@ fn default_fps() -> u8 {
 }
 fn default_quality() -> u8 {
     75
+}
+
+async fn status() -> impl Responder {
+    HttpResponse::Ok().json(json!({ "status": "ok" }))
 }
 
 async fn convert_to_gif(mut payload: Multipart) -> Result<HttpResponse, Error> {
@@ -312,9 +317,13 @@ async fn main() -> std::io::Result<()> {
         workers
     );
 
-    HttpServer::new(|| App::new().route("/convert", web::post().to(convert_to_gif)))
-        .workers(workers) // Set the number of worker threads.
-        .bind("0.0.0.0:8080")?
-        .run()
-        .await
+    HttpServer::new(|| {
+        App::new()
+            .route("/convert", web::post().to(convert_to_gif))
+            .route("/status", web::get().to(status))
+    })
+    .workers(workers) // Set the number of worker threads.
+    .bind("0.0.0.0:8080")?
+    .run()
+    .await
 }

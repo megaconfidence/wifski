@@ -107,9 +107,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		formData.set('start_time', startTimeInput.value);
 		formData.set('end_time', endTimeInput.value);
 
-		const jobID = crypto.randomUUID();
 		try {
-			const response = await fetch(`/convert/?id=${jobID}`, {
+			const response = await fetch('/convert', {
 				method: 'POST',
 				body: formData,
 			});

@@ -14,20 +14,20 @@ export class WifskiContainer extends Container {
 	override onError(error: unknown) {
 		console.log('Container error:', error);
 	}
-	async fetch(request: Request): Promise<Response> {
-		return await this.containerFetch(request);
-	}
 }
 
 export default {
 	async fetch(request: Request, env): Promise<Response> {
-		const url = new URL(request.url);
-		const isLocal = url.protocol === 'http:' ? true : false;
-		// const pathname = url.pathname;
-		// const jobID = url.searchParams.get('id');
+		const { hostname, pathname } = new URL(request.url);
+		const isLocal = hostname === 'localhost' ? true : false;
 
-		if (isLocal) return await fetch('http://localhost:8080/convert', request);
+		if (isLocal) {
+			return await fetch('http://localhost:8080' + pathname, request);
+		}
+
 		let container = await loadBalance(env.WIFSKI_CONTAINER, 3);
 		return await container.fetch(request);
+
+		// return await getContainer(env.WIFSKI_CONTAINER).fetch(request);
 	},
 } satisfies ExportedHandler<Env>;

@@ -10,10 +10,10 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"containers": [
 		{
-			"max_instances": 10,
+			"max_instances": 3,
 			"name": "wifski-container",
 			"class_name": "WifskiContainer",
-			"image": "./wifski-container/Dockerfile",
+			"image": "./Dockerfile",
 		},
 	],
 	"migrations": [
