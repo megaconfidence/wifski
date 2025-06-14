@@ -7,28 +7,35 @@
 	"name": "wifski",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-06-14",
+	"compatibility_flags": ["nodejs_compat"],
+	"containers": [
+		{
+			"max_instances": 10,
+			"name": "wifski-container",
+			"class_name": "WifskiContainer",
+			"image": "./wifski-container/Dockerfile",
+		},
+	],
 	"migrations": [
 		{
-			"new_sqlite_classes": [
-				"MyDurableObject"
-			],
-			"tag": "v1"
-		}
+			"new_sqlite_classes": ["WifskiContainer"],
+			"tag": "v1",
+		},
 	],
 	"assets": {
-		"directory": "./public"
+		"directory": "./public",
 	},
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "MyDurableObject",
-				"name": "MY_DURABLE_OBJECT"
-			}
-		]
+				"class_name": "WifskiContainer",
+				"name": "WIFSKI_CONTAINER",
+			},
+		],
 	},
 	"observability": {
-		"enabled": true
-	}
+		"enabled": true,
+	},
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
