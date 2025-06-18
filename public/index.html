@@ -7,150 +7,168 @@
 		<script src="https://cdn.tailwindcss.com"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
 		<style>
 			body {
-				font-family: 'Inter', sans-serif;
-				background-color: #f3f4f6; /* gray-100 */
+				font-family: 'Share Tech Mono', monospace;
+				background-color: #0d0221;
+				background-image:
+					linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+				background-size: 35px 35px;
+				color: #e0e0e0;
 			}
 
-			.dark body {
-				background-color: #111827; /* gray-900 */
+			.cyber-card {
+				background: rgba(10, 2, 30, 0.8);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px);
+				border: 1px solid rgba(0, 255, 255, 0.4);
+				box-shadow:
+					0 0 15px rgba(0, 255, 255, 0.15),
+					inset 0 0 8px rgba(0, 255, 255, 0.1);
 			}
 
-			/* Custom styles for the dual-thumb slider */
+			.cyber-border-b {
+				border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+			}
+
+			/* Slider */
 			.slider-container {
 				position: relative;
 				height: 2rem;
 			}
-
 			.slider-track {
 				position: absolute;
-				height: 6px;
-				background-color: #e5e7eb; /* gray-200 */
+				height: 4px;
+				background-color: rgba(0, 255, 255, 0.2);
 				width: 100%;
 				top: 50%;
 				transform: translateY(-50%);
-				border-radius: 9999px;
-				z-index: 1;
+				border-radius: 2px;
 			}
-
-			.dark .slider-track {
-				background-color: #374151; /* gray-700 */
-			}
-
 			.slider-track-highlight {
 				position: absolute;
-				height: 6px;
-				background-color: #3b82f6; /* blue-500 */
+				height: 4px;
+				background-color: #00f0f0;
 				top: 50%;
 				transform: translateY(-50%);
-				border-radius: 9999px;
-				z-index: 2;
+				border-radius: 2px;
+				box-shadow: 0 0 8px #00f0f0;
 			}
-
 			input[type='range'].slider {
 				-webkit-appearance: none;
 				appearance: none;
 				position: absolute;
 				width: 100%;
-				height: 6px;
+				height: 4px;
 				top: 50%;
 				transform: translateY(-50%);
 				background: transparent;
 				pointer-events: none;
-				z-index: 3;
 				margin: 0;
 			}
-
 			input[type='range'].slider::-webkit-slider-thumb {
 				-webkit-appearance: none;
-				appearance: none;
 				width: 20px;
 				height: 20px;
-				background-color: white;
-				border: 1px solid #d1d5db; /* gray-300 */
+				background-color: #00f0f0;
 				border-radius: 50%;
 				cursor: pointer;
 				pointer-events: auto;
-				box-shadow:
-					0 1px 3px 0 rgb(0 0 0 / 0.1),
-					0 1px 2px -1px rgb(0 0 0 / 0.1);
+				box-shadow: 0 0 12px #00f0f0;
 			}
-
-			.dark input[type='range'].slider::-webkit-slider-thumb {
-				background-color: #d1d5db; /* gray-300 */
-				border-color: #4b5563; /* gray-600 */
-			}
-
 			input[type='range'].slider::-moz-range-thumb {
 				width: 20px;
 				height: 20px;
-				background-color: white;
-				border: 1px solid #d1d5db;
+				background-color: #00f0f0;
+				border: none;
 				border-radius: 50%;
 				cursor: pointer;
 				pointer-events: auto;
-				box-shadow:
-					0 1px 3px 0 rgb(0 0 0 / 0.1),
-					0 1px 2px -1px rgb(0 0 0 / 0.1);
-			}
-
-			.dark input[type='range'].slider::-moz-range-thumb {
-				background-color: #d1d5db;
-				border-color: #4b5563;
+				box-shadow: 0 0 12px #00f0f0;
 			}
 
 			.loader {
-				border: 6px solid #e5e7eb; /* gray-200 */
+				border: 6px solid transparent;
 				border-radius: 50%;
-				width: 64px;
-				height: 64px;
+				width: 80px;
+				height: 80px;
 				animation: spin-colors 2s linear infinite;
-			}
-
-			.dark .loader {
-				border-color: #374151;
 			}
 
 			@keyframes spin-colors {
 				0% {
 					transform: rotate(0deg);
-					border-top-color: #3b82f6; /* blue-500 */
+					border-top-color: #00f0f0;
+					border-right-color: #00f0f0;
 				}
 				25% {
-					border-top-color: #22c55e; /* green-500 */
+					border-top-color: #f0f;
+					border-right-color: #f0f;
 				}
 				50% {
-					border-top-color: #eab308; /* yellow-500 */
+					border-top-color: #ff0;
+					border-right-color: #ff0;
 				}
 				75% {
-					border-top-color: #ef4444; /* red-500 */
+					border-top-color: #0f0;
+					border-right-color: #0f0;
 				}
 				100% {
 					transform: rotate(360deg);
-					border-top-color: #3b82f6; /* blue-500 */
+					border-top-color: #00f0f0;
+					border-right-color: #00f0f0;
 				}
+			}
+
+			.cyber-button {
+				position: relative;
+				color: #00f0f0;
+				text-shadow: 0 0 5px #00f0f0;
+				transition: all 0.3s ease;
+				clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+			}
+			.cyber-button:hover {
+				background: rgba(0, 255, 255, 0.1);
+				box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+			}
+			.cyber-button::after {
+				content: '';
+				position: absolute;
+				top: 2px;
+				left: 2px;
+				width: calc(100% - 4px);
+				height: calc(100% - 4px);
+				border: 1px solid rgba(0, 255, 255, 0.7);
 			}
 		</style>
 	</head>
-	<body class="text-gray-900 dark:text-gray-100">
+	<body class="bg-gray-900 text-gray-200">
 		<div class="container mx-auto max-w-3xl p-4 sm:p-6 lg:p-8">
 			<header class="text-center mb-10">
-				<h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Wifski</h1>
-				<p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Create high-quality GIFs from your videos on the web.</p>
+				<h1
+					class="text-5xl sm:text-6xl font-bold tracking-widest text-cyan-300"
+					style="
+						text-shadow:
+							0 0 10px #00f0f0,
+							0 0 20px #00f0f0;
+					"
+				>
+					Wifski
+				</h1>
+				<p class="text-lg text-cyan-200/80 mt-2">Create high-quality GIFs from your videos on the web.</p>
 			</header>
 
 			<main class="space-y-8">
 				<!-- Step 1: File Upload -->
-				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-					<h2 class="text-2xl font-semibold mb-4 border-b border-gray-200 dark:border-gray-700 pb-3">1. Select Video</h2>
+				<div class="cyber-card p-6">
+					<h2 class="text-2xl font-semibold mb-4 cyber-border-b pb-3 text-cyan-300">1. SELECT VIDEO</h2>
 					<label
 						for="video-input"
-						class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 border-gray-300 dark:border-gray-600 transition-colors"
+						class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer bg-black/20 hover:bg-black/40 border-cyan-500/50 hover:border-cyan-400 transition-colors"
 					>
 						<div class="text-center">
-							<svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+							<svg class="mx-auto h-12 w-12 text-cyan-400/70" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
 								<path
 									d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8"
 									stroke-width="2"
@@ -158,21 +176,19 @@
 									stroke-linejoin="round"
 								/>
 							</svg>
-							<p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-								<span class="font-semibold text-blue-600">Click to upload</span> or drag and drop
-							</p>
-							<p id="file-name" class="mt-1 text-xs text-gray-500 dark:text-gray-400"></p>
+							<p class="mt-1 text-sm text-cyan-300/80"><span class="font-semibold text-cyan-400">UPLOAD FILE</span> OR DRAG AND DROP</p>
+							<p id="file-name" class="mt-1 text-xs text-cyan-500/70"></p>
 						</div>
 						<input id="video-input" type="file" class="sr-only" accept="video/*" />
 					</label>
-					<p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">Max file size: 100MB</p>
+					<p class="text-xs text-cyan-400/60 text-center mt-2">MAX FILE SIZE: 100MB</p>
 				</div>
 
 				<form id="conversion-form" class="hidden space-y-8">
 					<!-- Step 2: Trim Video -->
-					<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-						<h2 class="text-2xl font-semibold mb-4 border-b border-gray-200 dark:border-gray-700 pb-3">2. Trim Video</h2>
-						<video id="video-preview" class="w-full rounded-lg bg-black mb-4" controls></video>
+					<div class="cyber-card p-6">
+						<h2 class="text-2xl font-semibold mb-4 cyber-border-b pb-3 text-cyan-300">2. TRIM VIDEO</h2>
+						<video id="video-preview" class="w-full rounded-lg bg-black mb-4 border border-cyan-800" controls></video>
 
 						<div class="slider-container my-4">
 							<div class="slider-track"></div>
@@ -181,22 +197,22 @@
 							<input type="range" class="slider" id="end-slider" value="100" min="0" step="0.1" />
 						</div>
 
-						<div class="flex justify-between items-center text-sm font-mono">
+						<div class="flex justify-between items-center text-sm font-mono text-cyan-300">
 							<span id="start_time_display">00:00:00</span>
 							<span id="end_time_display">00:00:00</span>
 						</div>
 					</div>
 
 					<!-- Step 3: Conversion Options -->
-					<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-						<h2 class="text-2xl font-semibold mb-4 border-b border-gray-200 dark:border-gray-700 pb-3">3. Options</h2>
+					<div class="cyber-card p-6">
+						<h2 class="text-2xl font-semibold mb-4 cyber-border-b pb-3 text-cyan-300">3. OPTIONS</h2>
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 							<div>
-								<label for="resize" class="block text-sm font-medium">Resize</label>
+								<label for="resize" class="block text-sm font-medium text-cyan-200/80">RESIZE</label>
 								<select
 									id="resize"
 									name="resize"
-									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+									class="mt-1 block w-full p-2 border rounded-md bg-gray-900/70 border-cyan-700/50 text-gray-200 focus:ring-cyan-500 focus:border-cyan-500"
 								>
 									<option value="100" selected>100% (Original)</option>
 									<option value="75">75%</option>
@@ -205,11 +221,11 @@
 								</select>
 							</div>
 							<div>
-								<label for="speed" class="block text-sm font-medium">Speed</label>
+								<label for="speed" class="block text-sm font-medium text-cyan-200/80">SPEED</label>
 								<select
 									id="speed"
 									name="speed"
-									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+									class="mt-1 block w-full p-2 border rounded-md bg-gray-900/70 border-cyan-700/50 text-gray-200 focus:ring-cyan-500 focus:border-cyan-500"
 								>
 									<option value="1.0" selected>1x</option>
 									<option value="2.0">2x</option>
@@ -219,7 +235,7 @@
 								</select>
 							</div>
 							<div>
-								<label for="fps" class="block text-sm font-medium">FPS (3-10)</label>
+								<label for="fps" class="block text-sm font-medium text-cyan-200/80">FPS (3-10)</label>
 								<input
 									type="number"
 									id="fps"
@@ -227,11 +243,11 @@
 									value="8"
 									min="3"
 									max="10"
-									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+									class="mt-1 block w-full p-2 border rounded-md bg-gray-900/70 border-cyan-700/50 text-gray-200 focus:ring-cyan-500 focus:border-cyan-500"
 								/>
 							</div>
 							<div>
-								<label for="quality" class="block text-sm font-medium">Quality (0-100)</label>
+								<label for="quality" class="block text-sm font-medium text-cyan-200/80">QUALITY (0-100)</label>
 								<input
 									type="number"
 									id="quality"
@@ -239,15 +255,15 @@
 									value="75"
 									min="0"
 									max="100"
-									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+									class="mt-1 block w-full p-2 border rounded-md bg-gray-900/70 border-cyan-700/50 text-gray-200 focus:ring-cyan-500 focus:border-cyan-500"
 								/>
 							</div>
 							<div class="md:col-span-2">
-								<label for="loop" class="block text-sm font-medium">Loop</label>
+								<label for="loop" class="block text-sm font-medium text-cyan-200/80">LOOP</label>
 								<select
 									id="loop"
 									name="loop"
-									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
+									class="mt-1 block w-full p-2 border rounded-md bg-gray-900/70 border-cyan-700/50 text-gray-200 focus:ring-cyan-500 focus:border-cyan-500"
 								>
 									<option value="forever" selected>Loop Forever</option>
 									<option value="bounce">Bounce</option>
@@ -258,52 +274,56 @@
 
 					<!-- Submit Button -->
 					<div class="text-center">
-						<button
-							type="submit"
-							class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-						>
-							Create GIF
-						</button>
+						<button type="submit" class="cyber-button w-full sm:w-auto font-bold py-3 px-8 rounded-none">CREATE GIF</button>
 					</div>
 				</form>
 
 				<!-- Step 4: Result -->
-				<div id="result-section" class="hidden text-center bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+				<div id="result-section" class="hidden text-center cyber-card p-6">
 					<div id="loader" class="hidden flex flex-col items-center justify-center">
 						<div class="loader"></div>
-						<p class="mt-4 text-gray-600 dark:text-gray-400">Converting your video...</p>
+						<p class="mt-4 text-cyan-300/80">CONVERTING VIDEO...</p>
 					</div>
 					<div id="gif-container" class="hidden">
-						<h2 class="text-2xl font-semibold mb-4">Your GIF is Ready!</h2>
-						<img id="gif-preview" class="w-full max-w-md mx-auto rounded-lg shadow-lg mb-6" alt="Converted GIF" />
+						<h2 class="text-2xl font-semibold mb-4 text-cyan-300">GIF READY</h2>
+						<img
+							id="gif-preview"
+							class="w-full max-w-md mx-auto rounded-lg shadow-lg mb-6 border-2 border-cyan-600/50"
+							alt="Converted GIF"
+						/>
 						<a
 							id="download-button"
 							href="#"
 							download="converted.gif"
-							class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+							class="cyber-button inline-block bg-green-500/10 border-green-400 text-green-400 font-bold py-3 px-8 rounded-none"
 						>
-							Download GIF
+							DOWNLOAD
 						</a>
 					</div>
-					<div
-						id="error-container"
-						class="hidden bg-red-100 dark:bg-red-900/20 border border-red-400 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg relative"
-					>
-						<strong class="font-bold">Conversion Failed!</strong>
-						<span class="block sm:inline">Something went wrong. Please check your settings and try again.</span>
+					<div id="error-container" class="hidden border border-red-500/50 bg-red-900/30 text-red-300 px-4 py-3 rounded-none relative">
+						<strong class="font-bold">CONVERSION FAILED!</strong>
+						<p id="api-error-message" class="block sm:inline mt-2 font-mono text-sm">An error occurred. Check parameters and try again.</p>
 					</div>
 				</div>
 			</main>
 		</div>
 
 		<footer class="text-center py-6">
-			<p class="text-sm text-gray-500 dark:text-gray-400">
+			<p class="text-sm text-gray-500">
 				Built with 🧡 using
-				<a href="https://developers.cloudflare.com/workers/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline"
+				<a
+					href="https://developers.cloudflare.com/workers/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-cyan-400 hover:underline hover:text-shadow-[0_0_5px_#00f0f0]"
 					>Cloudflare Workers</a
 				>
 				—
-				<a href="https://github.com/megaconfidence/wifski" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline"
+				<a
+					href="https://github.com/megaconfidence/wifski"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-cyan-400 hover:underline hover:text-shadow-[0_0_5px_#00f0f0]"
 					>👀 the code</a
 				>
 			</p>
@@ -326,6 +346,7 @@
 				const loader = document.getElementById('loader');
 				const gifContainer = document.getElementById('gif-container');
 				const errorContainer = document.getElementById('error-container');
+				const apiErrorMessage = document.getElementById('api-error-message');
 				const gifPreview = document.getElementById('gif-preview');
 				const downloadButton = document.getElementById('download-button');
 
@@ -408,7 +429,6 @@
 					gifContainer.classList.add('hidden');
 					errorContainer.classList.add('hidden');
 
-					// Scroll to the loader as soon as the button is clicked
 					resultSection.scrollIntoView({ behavior: 'smooth' });
 
 					const formData = new FormData(conversionForm);
@@ -424,7 +444,8 @@
 						});
 
 						if (!response.ok) {
-							throw new Error(`Server responded with status: ${response.status}`);
+							const errorText = await response.text();
+							throw new Error(errorText || `Server responded with status: ${response.status}`);
 						}
 
 						const blob = await response.blob();
@@ -436,10 +457,10 @@
 						gifContainer.classList.remove('hidden');
 					} catch (error) {
 						console.error('Conversion failed:', error);
+						apiErrorMessage.textContent = error.message;
 						loader.classList.add('hidden');
 						errorContainer.classList.remove('hidden');
 					} finally {
-						// Scroll again when the process completes to ensure visibility
 						resultSection.scrollIntoView({ behavior: 'smooth' });
 					}
 				});
