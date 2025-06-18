@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Wifski-Container</title>
+		<title>Wifski</title>
 		<script src="https://cdn.tailwindcss.com"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -102,20 +102,34 @@
 			}
 
 			.loader {
-				border: 4px solid #e5e7eb; /* gray-200 */
-				border-top: 4px solid #3b82f6; /* blue-500 */
+				border: 6px solid #e5e7eb; /* gray-200 */
 				border-radius: 50%;
-				width: 48px;
-				height: 48px;
-				animation: spin 1s linear infinite;
+				width: 64px;
+				height: 64px;
+				animation: spin-colors 2s linear infinite;
 			}
 
-			@keyframes spin {
+			.dark .loader {
+				border-color: #374151;
+			}
+
+			@keyframes spin-colors {
 				0% {
 					transform: rotate(0deg);
+					border-top-color: #3b82f6; /* blue-500 */
+				}
+				25% {
+					border-top-color: #22c55e; /* green-500 */
+				}
+				50% {
+					border-top-color: #eab308; /* yellow-500 */
+				}
+				75% {
+					border-top-color: #ef4444; /* red-500 */
 				}
 				100% {
 					transform: rotate(360deg);
+					border-top-color: #3b82f6; /* blue-500 */
 				}
 			}
 		</style>
@@ -123,8 +137,8 @@
 	<body class="text-gray-900 dark:text-gray-100">
 		<div class="container mx-auto max-w-3xl p-4 sm:p-6 lg:p-8">
 			<header class="text-center mb-10">
-				<h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Wifski-Container</h1>
-				<p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Create high-quality GIFs from your videos.</p>
+				<h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Wifski</h1>
+				<p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Create high-quality GIFs from your videos on the web.</p>
 			</header>
 
 			<main class="space-y-8">
@@ -145,8 +159,7 @@
 								/>
 							</svg>
 							<p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-								<span class="font-semibold text-blue-600">Click to upload</span>
-								or drag and drop
+								<span class="font-semibold text-blue-600">Click to upload</span> or drag and drop
 							</p>
 							<p id="file-name" class="mt-1 text-xs text-gray-500 dark:text-gray-400"></p>
 						</div>
@@ -167,27 +180,9 @@
 							<input type="range" class="slider" id="end-slider" value="100" min="0" step="0.1" />
 						</div>
 
-						<div class="flex justify-between items-center text-sm">
-							<div>
-								<label for="start_time" class="font-medium">Start (s)</label>
-								<input
-									type="text"
-									id="start_time"
-									name="start_time"
-									class="mt-1 block w-24 p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
-									value="0.0"
-								/>
-							</div>
-							<div class="text-right">
-								<label for="end_time" class="font-medium">End (s)</label>
-								<input
-									type="text"
-									id="end_time"
-									name="end_time"
-									class="mt-1 block w-24 p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
-									value="0.0"
-								/>
-							</div>
+						<div class="flex justify-between items-center text-sm font-mono">
+							<span id="start_time_display">00:00:00</span>
+							<span id="end_time_display">00:00:00</span>
 						</div>
 					</div>
 
@@ -202,8 +197,8 @@
 									name="resize"
 									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
 								>
-									<option value="75" selected>75%</option>
-									<option value="100">100% (Original)</option>
+									<option value="100" selected>100% (Original)</option>
+									<option value="75">75%</option>
 									<option value="50">50%</option>
 									<option value="25">25%</option>
 								</select>
@@ -216,12 +211,10 @@
 									class="mt-1 block w-full p-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
 								>
 									<option value="1.0" selected>1x</option>
-									<option value="0.5">0.5x</option>
-									<option value="1.5">1.5x</option>
-									<option value="2.0">2.0x</option>
-									<option value="3.0">3.0x</option>
-									<option value="4.0">4.0x</option>
-									<option value="5.0">5.0x</option>
+									<option value="2.0">2x</option>
+									<option value="3.0">3x</option>
+									<option value="4.0">4x</option>
+									<option value="5.0">5x</option>
 								</select>
 							</div>
 							<div>
@@ -257,10 +250,6 @@
 								>
 									<option value="forever" selected>Loop Forever</option>
 									<option value="bounce">Bounce</option>
-									<option value="0">Don't Loop</option>
-									<option value="1">Loop 1 Time</option>
-									<option value="3">Loop 3 Times</option>
-									<option value="5">Loop 5 Times</option>
 								</select>
 							</div>
 						</div>
@@ -279,7 +268,7 @@
 
 				<!-- Step 4: Result -->
 				<div id="result-section" class="hidden text-center bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-					<div id="loader" class="hidden mx-auto">
+					<div id="loader" class="hidden flex flex-col items-center justify-center">
 						<div class="loader"></div>
 						<p class="mt-4 text-gray-600 dark:text-gray-400">Converting your video...</p>
 					</div>
@@ -306,6 +295,143 @@
 			</main>
 		</div>
 
-		<script src="index.js"></script>
+		<footer class="text-center py-6">
+			<p class="text-sm text-gray-500 dark:text-gray-400">
+				Built with 🧡 using
+				<a href="https://developers.cloudflare.com/workers/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline"
+					>Cloudflare Workers</a
+				>
+				—
+				<a href="https://github.com/megaconfidence/wifski" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline"
+					>👀 the code</a
+				>
+			</p>
+		</footer>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const videoInput = document.getElementById('video-input');
+				const fileNameDisplay = document.getElementById('file-name');
+				const conversionForm = document.getElementById('conversion-form');
+				const videoPreview = document.getElementById('video-preview');
+
+				const startSlider = document.getElementById('start-slider');
+				const endSlider = document.getElementById('end-slider');
+				const startTimeDisplay = document.getElementById('start_time_display');
+				const endTimeDisplay = document.getElementById('end_time_display');
+				const sliderHighlight = document.getElementById('slider-highlight');
+
+				const resultSection = document.getElementById('result-section');
+				const loader = document.getElementById('loader');
+				const gifContainer = document.getElementById('gif-container');
+				const errorContainer = document.getElementById('error-container');
+				const gifPreview = document.getElementById('gif-preview');
+				const downloadButton = document.getElementById('download-button');
+
+				let videoFile = null;
+
+				videoInput.addEventListener('change', (e) => {
+					if (e.target.files && e.target.files[0]) {
+						videoFile = e.target.files[0];
+						fileNameDisplay.textContent = videoFile.name;
+						const fileURL = URL.createObjectURL(videoFile);
+						videoPreview.src = fileURL;
+						conversionForm.classList.remove('hidden');
+						resultSection.classList.add('hidden');
+					}
+				});
+
+				videoPreview.addEventListener('loadedmetadata', () => {
+					const duration = videoPreview.duration;
+					startSlider.max = duration;
+					endSlider.max = duration;
+					startSlider.value = 0;
+					endSlider.value = duration;
+					startTimeDisplay.textContent = formatTimeHHMMSS(0);
+					endTimeDisplay.textContent = formatTimeHHMMSS(duration);
+					updateSliderHighlight();
+				});
+
+				function updateSliderHighlight() {
+					const max = parseFloat(startSlider.max);
+					const start = parseFloat(startSlider.value);
+					const end = parseFloat(endSlider.value);
+
+					sliderHighlight.style.left = `${(start / max) * 100}%`;
+					sliderHighlight.style.width = `${((end - start) / max) * 100}%`;
+				}
+
+				function formatTimeHHMMSS(seconds) {
+					if (isNaN(seconds) || seconds < 0) {
+						return '00:00:00';
+					}
+					return new Date(seconds * 1000).toISOString().substr(11, 8);
+				}
+
+				startSlider.addEventListener('input', () => {
+					if (parseFloat(startSlider.value) >= parseFloat(endSlider.value)) {
+						startSlider.value = parseFloat(endSlider.value) - 0.1;
+					}
+					startTimeDisplay.textContent = formatTimeHHMMSS(startSlider.value);
+					updateSliderHighlight();
+				});
+
+				endSlider.addEventListener('input', () => {
+					if (parseFloat(endSlider.value) <= parseFloat(startSlider.value)) {
+						endSlider.value = parseFloat(startSlider.value) + 0.1;
+					}
+					endTimeDisplay.textContent = formatTimeHHMMSS(endSlider.value);
+					updateSliderHighlight();
+				});
+
+				conversionForm.addEventListener('submit', async (e) => {
+					e.preventDefault();
+					if (!videoFile) {
+						alert('Please select a video file first.');
+						return;
+					}
+
+					resultSection.classList.remove('hidden');
+					loader.classList.remove('hidden');
+					gifContainer.classList.add('hidden');
+					errorContainer.classList.add('hidden');
+
+					// Scroll to the loader as soon as the button is clicked
+					resultSection.scrollIntoView({ behavior: 'smooth' });
+
+					const formData = new FormData(conversionForm);
+					formData.append('video', videoFile);
+
+					formData.append('start_time', parseFloat(startSlider.value).toFixed(1));
+					formData.append('end_time', parseFloat(endSlider.value).toFixed(1));
+
+					try {
+						const response = await fetch('/convert', {
+							method: 'POST',
+							body: formData,
+						});
+
+						if (!response.ok) {
+							throw new Error(`Server responded with status: ${response.status}`);
+						}
+
+						const blob = await response.blob();
+						const gifUrl = URL.createObjectURL(blob);
+						gifPreview.src = gifUrl;
+						downloadButton.href = gifUrl;
+
+						loader.classList.add('hidden');
+						gifContainer.classList.remove('hidden');
+					} catch (error) {
+						console.error('Conversion failed:', error);
+						loader.classList.add('hidden');
+						errorContainer.classList.remove('hidden');
+					} finally {
+						// Scroll again when the process completes to ensure visibility
+						resultSection.scrollIntoView({ behavior: 'smooth' });
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

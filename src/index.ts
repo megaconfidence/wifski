@@ -1,4 +1,4 @@
-import { Container, getContainer, loadBalance } from 'cf-containers';
+import { Container, getContainer, loadBalance } from '@cloudflare/containers';
 
 export class WifskiContainer extends Container {
 	defaultPort = 8080;

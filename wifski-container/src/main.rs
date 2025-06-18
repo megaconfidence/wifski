@@ -204,8 +204,9 @@ async fn convert_to_gif(mut payload: Multipart) -> Result<HttpResponse, Error> {
     palette_cmd.arg("-i").arg(input_path);
 
     if matches!(options.loop_opt, LoopOption::Bounce) {
+        // Corrected logic for bounce: filter, split, reverse one copy, then concat.
         let filter_complex = format!(
-            "[0:v]{},reverse[r];[0:v][r]concat=n=2:v=1:a=0,palettegen=stats_mode=full",
+            "[0:v]{},split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0,palettegen=stats_mode=full",
             base_filters
         );
         palette_cmd.arg("-filter_complex").arg(filter_complex);
@@ -243,8 +244,9 @@ async fn convert_to_gif(mut payload: Multipart) -> Result<HttpResponse, Error> {
         .arg(&palette_path);
 
     if matches!(options.loop_opt, LoopOption::Bounce) {
+        // Corrected logic for bounce in the second pass as well.
         let bounce_filter = format!(
-            "[0:v]{},reverse[r];[0:v][r]concat=n=2:v=1:a=0[v];[v][1:v]paletteuse=dither={}",
+            "[0:v]{},split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0[v];[v][1:v]paletteuse=dither={}",
             base_filters, dither_option
         );
         gif_cmd.arg("-filter_complex").arg(bounce_filter);
