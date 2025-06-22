@@ -14,10 +14,7 @@
 			"name": "wifski-container",
 			"class_name": "WifskiContainer",
 			"image": "./Dockerfile",
-			"configuration": {
-				"vcpu": 2,
-				"disk": { "size": "4GB" },
-			},
+			"instance_type": "standard",
 		},
 	],
 	"migrations": [
