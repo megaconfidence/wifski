@@ -10,9 +10,9 @@
 	},
 	"devDependencies": {
 		"typescript": "^5.5.2",
-		"wrangler": "^4.20.3"
+		"wrangler": "^4.21.2"
 	},
 	"dependencies": {
-		"@cloudflare/containers": "^0.0.7"
+		"@cloudflare/containers": "^0.0.13"
 	}
 }
