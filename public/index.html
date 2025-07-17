@@ -353,6 +353,47 @@
 				let videoFile = null;
 				const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
 
+				// Get the file upload label for drag and drop
+				const uploadLabel = document.querySelector('label[for="video-input"]');
+
+				// Drag and drop event handlers
+				uploadLabel.addEventListener('dragover', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					uploadLabel.classList.add('bg-black/60', 'border-cyan-300');
+				});
+
+				uploadLabel.addEventListener('dragleave', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					uploadLabel.classList.remove('bg-black/60', 'border-cyan-300');
+				});
+
+				uploadLabel.addEventListener('drop', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					uploadLabel.classList.remove('bg-black/60', 'border-cyan-300');
+
+					const files = e.dataTransfer.files;
+
+					if (files.length > 0) {
+						const file = files[0];
+
+						if (!file.type.startsWith('video/')) {
+							alert('Please select a video file.');
+							return;
+						}
+
+						const dt = new DataTransfer();
+
+						dt.items.add(file);
+
+						videoInput.files = dt.files;
+
+						videoInput.dispatchEvent(new Event('change', { bubbles: true }));
+					}
+				});
+
 				videoInput.addEventListener('change', (e) => {
 					if (e.target.files && e.target.files[0]) {
 						const selectedFile = e.target.files[0];
