@@ -1,4 +1,4 @@
-import { Container, loadBalance } from '@cloudflare/containers';
+import { Container, getRandom } from '@cloudflare/containers';
 
 export class WifskiContainer extends Container {
 	defaultPort = 8080;
@@ -17,7 +17,7 @@ export class WifskiContainer extends Container {
 
 export default {
 	async fetch(request: Request, env): Promise<Response> {
-		let container = await loadBalance(env.WIFSKI_CONTAINER, 3);
+		let container = await getRandom(env.WIFSKI_CONTAINER, 3);
 		return await container.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;
