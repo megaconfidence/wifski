@@ -452,6 +452,15 @@
 						const gifUrl = URL.createObjectURL(blob);
 						gifPreview.src = gifUrl;
 						downloadButton.href = gifUrl;
+						const currentFileName = fileNameDisplay.textContent;
+						if (currentFileName) {
+							const lastDotIndex = currentFileName.lastIndexOf(".");
+							downloadButton.download = lastDotIndex !== -1
+								? currentFileName.substring(0, lastDotIndex) + '.gif'
+								: currentFileName + '.gif';
+						} else {
+							downloadButton.download = "converted.gif";
+						}
 
 						loader.classList.add('hidden');
 						gifContainer.classList.remove('hidden');
